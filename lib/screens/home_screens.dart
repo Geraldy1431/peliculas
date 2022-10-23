@@ -1,11 +1,20 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:peliculas/providers/movies_providers.dart';
 import 'package:peliculas/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final moviesProvider = Provider.of<MoviesProvider>(context);
+
+    print(moviesProvider.onDisplayMovies);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Peliculas en cine'),
@@ -17,7 +26,13 @@ class HomeScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
-            children: const [CardSwipes(), MovieSlider()],
+            children:  [CardSwipes(movies: moviesProvider.onDisplayMovies),  MovieSlider(
+              movies: moviesProvider.popularMovies,
+              title: 'Populares',
+              onNextpage: () => moviesProvider.getPopularMovies()
+
+           
+            )],
           ),
         ));
   }
