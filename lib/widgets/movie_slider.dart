@@ -1,7 +1,6 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-
 
 import '../models/movies.dart';
 
@@ -22,7 +21,7 @@ class MovieSlider extends StatefulWidget {
 }
 
 class _MovieSliderState extends State<MovieSlider> {
-  final ScrollController scrollController =  ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -50,14 +49,14 @@ class _MovieSliderState extends State<MovieSlider> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.title != null)
-          const  Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child:  Text(
-                 'dshgkjfdhds',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                widget.title!,
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-       const   SizedBox(height: 5),
+          const SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
                 controller: scrollController,
@@ -97,7 +96,7 @@ class _MoviePoster extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: FadeInImage(
-                  placeholder:const AssetImage('assets/no-image.jpg'),
+                  placeholder: const AssetImage('assets/no-image.jpg'),
                   image: NetworkImage(movie.fullPosterImg),
                   width: 130,
                   height: 190,
@@ -106,7 +105,7 @@ class _MoviePoster extends StatelessWidget {
               ),
             ),
           ),
-         const SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             movie.title,
             maxLines: 2,
