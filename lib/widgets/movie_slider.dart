@@ -28,7 +28,6 @@ if (scrollController.position.pixels >= scrollController.position.maxScrollExten
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -45,7 +44,7 @@ if (scrollController.position.pixels >= scrollController.position.maxScrollExten
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(widget.title!,
                     style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold))),
+                        fontSize: 13, fontWeight: FontWeight.bold))),
           const SizedBox(
             height: 7,
           ),

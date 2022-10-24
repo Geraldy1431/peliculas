@@ -22,7 +22,7 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate([
           _PosterAndTitle( movie: movie,),
           _OverView( movie: movie,),
-          CastingCard()
+          CastingCard(  movieId: movie.id, )
         ]))
       ],
     ));
@@ -85,39 +85,42 @@ class _PosterAndTitle extends StatelessWidget {
         const SizedBox(
           width: 20,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-             movie.title,
-              style: textTheme.
-              titleMedium,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            Text(
-             movie.originalTitle,
-              style: textTheme.labelLarge,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.star_outline,
-                  size: 17,
-                  color: Colors.grey,
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  '${movie.voteAverage}',
-                  style: textTheme.bodySmall,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
-              ],
-            )
-          ],
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 200, ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+               movie.title,
+                style: textTheme.
+                titleMedium,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              Text(
+               movie.originalTitle,
+                style: textTheme.labelLarge,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star_outline,
+                    size: 17,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    '${movie.voteAverage}',
+                    style: textTheme.bodySmall,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ],
+              )
+            ],
+          ),
         )
       ]),
     );
