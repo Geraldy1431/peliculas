@@ -1,29 +1,39 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
+
 
 import '../models/movies.dart';
 
 class MovieSlider extends StatefulWidget {
   final List<Movie> movies;
   final String? title;
-  final Function onNextpage;
+  final Function onNextPage;
 
-  const MovieSlider({super.key, required this.movies, this.title , required this.onNextpage});
+  const MovieSlider({
+    Key? key,
+    required this.movies,
+    required this.onNextPage,
+    this.title,
+  }) : super(key: key);
 
   @override
-  State<MovieSlider> createState() => _MovieSliderState();
+  _MovieSliderState createState() => _MovieSliderState();
 }
 
 class _MovieSliderState extends State<MovieSlider> {
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController =  ScrollController();
+
   @override
   void initState() {
-    scrollController.addListener(() {
-if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 500){
-  widget.onNextpage();
-}
-
-    });
     super.initState();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent - 500) {
+        widget.onNextPage();
+      }
+    });
   }
 
   @override
@@ -40,23 +50,23 @@ if (scrollController.position.pixels >= scrollController.position.maxScrollExten
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.title != null)
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(widget.title!,
-                    style: const TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.bold))),
-          const SizedBox(
-            height: 7,
-          ),
+          const  Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child:  Text(
+                 'dshgkjfdhds',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+       const   SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              itemCount: widget.movies.length,
-              itemBuilder: (_, int index) =>
-                  _MoviePoster(movie: widget.movies[index]),
-            ),
-          )
+                controller: scrollController,
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.movies.length,
+                itemBuilder: (_, int index) => _MoviePoster(
+                    widget.movies[index],
+                    '${widget.title}-$index-${widget.movies[index].id}')),
+          ),
         ],
       ),
     );
@@ -65,10 +75,14 @@ if (scrollController.position.pixels >= scrollController.position.maxScrollExten
 
 class _MoviePoster extends StatelessWidget {
   final Movie movie;
+  final String heroId;
 
-  const _MoviePoster({required this.movie});
+  const _MoviePoster(this.movie, this.heroId);
+
   @override
   Widget build(BuildContext context) {
+    movie.heroId = heroId;
+
     return Container(
       width: 130,
       height: 190,
@@ -76,28 +90,29 @@ class _MoviePoster extends StatelessWidget {
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'details',
-                arguments: movie),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: FadeInImage(
-                placeholder: const AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(movie.fullPosterImg),
-                width: 130,
-                height: 190,
-                fit: BoxFit.cover,
+            onTap: () =>
+                Navigator.pushNamed(context, 'details', arguments: movie),
+            child: Hero(
+              tag: movie.heroId!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: FadeInImage(
+                  placeholder:const AssetImage('assets/no-image.jpg'),
+                  image: NetworkImage(movie.fullPosterImg),
+                  width: 130,
+                  height: 190,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
+         const SizedBox(height: 5),
           Text(
             movie.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-          ),
+          )
         ],
       ),
     );

@@ -1,3 +1,5 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'dart:convert';
 
 class Movie {
@@ -32,6 +34,9 @@ class Movie {
   bool video;
   double voteAverage;
   int voteCount;
+
+  
+  String? heroId;
 
   get fullPosterImg {
     if (posterPath != null)

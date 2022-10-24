@@ -2,6 +2,8 @@
 //
 //     final creditsResponse = creditsResponseFromMap(jsonString);
 
+// ignore_for_file: prefer_if_null_operators, curly_braces_in_flow_control_structures
+
 import 'dart:convert';
 
 class CreditsResponse {
