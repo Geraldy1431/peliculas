@@ -54,7 +54,6 @@ class _CustomAppBar extends StatelessWidget {
       stretch: true,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        titlePadding: const EdgeInsets.all(0),
         title: Text(
           movie.title,
           style: const TextStyle(fontSize: 16),
