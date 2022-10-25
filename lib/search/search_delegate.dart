@@ -26,7 +26,12 @@ class MovieSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-      return const Text('buildResults');
+    return const Center(
+      child: Text("Pelicula no encontrada",
+      style:  TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      ),
+      
+    );
   }
 
     Widget _emptyContainer() {
